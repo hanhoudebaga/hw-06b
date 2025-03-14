@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import math
 """
 Created on Thu Jan 14 13:44:00 2016
 Updated Jan 21, 2018
@@ -26,7 +27,27 @@ def classifyTriangle(a,b,c):
       
       BEWARE: there may be a bug or two in this code
     """
-
+    if not(isinstance(a,int) and isinstance(b,int) and isinstance(c,int)):
+        return 'InvalidInput'
+    if a <= 0 or b <= 0 or c <= 0:
+        return 'InvalidInput'
+    if a > 200 or b > 200 or c > 200:
+        return 'InvalidInput'
+    if (a + b <= c) or (b + c <= a) or (a + c <= b):
+        return "NotATriangle"
+    if a == b == c:
+        type = "Equilateral"
+    elif a == b or b == c or a == c:
+        type = "Isosceles"
+    else:
+        type = "Scalene"
+        
+    if (math.isclose(a ** 2 + b ** 2, c ** 2) or 
+        math.isclose(a ** 2 + c ** 2, b ** 2) or 
+        math.isclose(b ** 2 + c ** 2, a ** 2)):
+        type = "Right"
+    
+    return type
     # require that the input values be >= 0 and <= 200
     if a > 200 or b > 200 or c > 200:
         return 'InvalidInput'
